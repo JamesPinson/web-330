@@ -1,0 +1,48 @@
+<!--
+============================================
+; Title: Pinson-Exercise 4.2.js
+; Author: Richard Krasso
+; Date: January 30th 2021
+; Modified By: James Pinson
+; Description: This assignment teaches us to complete a get request. 
+;============================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Assignment name</title>
+
+  <!-- jQuery reference -->
+  <script type="text/javascript"
+    src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js"
+    charset="UTF-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <h4> HTTP GET Request</h4>
+
+  <!--This creates a button to get a random dog breed. -->
+  <button id="get1">Get Random Breed</button>
+
+
+  <script>
+    //This creates a on-click function to get an random dog breed image.
+    //We also include the console.log so we can see in the console that the data has been retrieved and is a success. 
+    $(function () {
+
+      $("#get1").click(function () {
+
+        $.get('https://dog.ceo/api/breeds/image/random', function (data, status) {
+          console.log('Data: ' + JSON.stringify(data) + '\nStatus: ' + status);
+        })
+      });
+    });
+  </script>
+</body>
+
+</html>

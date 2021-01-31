@@ -1,0 +1,54 @@
+<!--
+============================================
+; Title: Pinson-Exercise 4.3.js
+; Author: Richard Krasso
+; Date: January 30th 2021
+; Modified By: James Pinson
+; Description: This assignment teaches us how to create an object literal delete request. 
+;============================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Assignment name</title>
+
+    <!-- jQuery reference -->
+    <script
+      type="text/javascript"
+      src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js"
+      charset="UTF-8"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+        <h4>HTTP DELETE Request</h4>
+
+        <!--This creates a button to delete security user.  -->
+        <button id="delete1">Delete Security User</button>
+
+    <script>
+
+    //This creates a on-click function to delete security user.
+    //We also include the console.log so we can see in the console that the data has been deleted and is a success. 
+      $(function() {
+
+            $("#delete1").click(function() {
+
+                $.ajax({
+                    url: 'http://httpbin.org/delete',
+                    dataType: 'json',
+                    type: 'DELETE',
+                    data: { username: 'admin', password: 'secret', email: 'as@me.com'},
+                    success: function(data, status) {
+                        console.log('Username: ' + data.form.username + '\nPassword: ' + data.form.password + '\nEmail: ' + data.form.email + '\nStatus: ' + status)
+                    }
+                })
+            });
+
+      });
+    </script>
+  </body>
+</html>
