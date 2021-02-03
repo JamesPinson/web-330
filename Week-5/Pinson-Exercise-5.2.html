@@ -1,0 +1,76 @@
+<!--
+============================================
+; Title: Pinson-Exercise 5.2.html
+; Author: Richard Krasso
+; Date: February 2nd 2021
+; Modified By: James Pinson
+; Description: This assignment teaches us use the Proxy Pattern.  
+;============================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercise 5.2 - The Proxy Pattern</title>
+    <!-- Reference for Bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+    <!-- jquery Reference Library -->
+    <script
+      type="text/javascript"
+      src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js"
+      charset="UTF-8"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  </head>
+  <body>
+      <!--This is the styling for the Navbar-->
+     <nav class="nav.navbar.navbar-dark bg-dark">
+         <a href="#" class="navbar-brand">Home</a>
+     </nav>  
+
+     <!--This is creating the div which holds the heading, proxy button, and results.-->
+     <br /> <br />
+     <div class="container">
+         <div class="row">
+             <div class="col-md-12">
+                 <h2>Exercise 5.2 - The Proxy Pattern</h2>
+
+                 <button class="btn btn-primary" id="btnPreviewProxy"> Preview Proxy</button>
+
+                 <br />
+                 <span id="spanProxyResults"></span>
+             </div>
+         </div>
+     </div>
+    <script>
+        //This is the start of the program. 
+        
+        //This is creating our function which assigns the make and model to our variable console. 
+      $(function() {
+
+        var console = {
+            make: "Sony",
+            model: "PS5",
+        //This is the display function which will show how we want the output to be displayed. 
+            display: function() {
+        //This will clear the span so that the results rewrite instead of continuing to add a new result. 
+                $('#spanProxyResults').html("");
+
+        //This will output the result in the desire format. 
+                $("#spanProxyResults").append("<br />Make: " + this.make + "<br />" + "Model: " + this.model);
+            }
+        };
+    
+        //This is our on click event which shows that once we click then it will find the var console and run the display function. 
+        $("#btnPreviewProxy").click($.proxy(console, "display"));
+
+        //This is the end of the program. 
+      });
+    </script>
+  </body>
+</html>
