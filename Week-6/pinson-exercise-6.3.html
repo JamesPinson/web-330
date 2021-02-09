@@ -1,0 +1,92 @@
+<!--
+============================================
+; Title: Pinson-Exercise 6.3.html
+; Author: Richard Krasso
+; Date: February 9th 2021
+; Modified By: James Pinson
+; Description: This assignment teaches us use knockout.js to data bind and create a Person View Model.   
+;============================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Exercise 6.3</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+
+    <!-- JavaScript Libraries -->
+    <script
+      type="text/javascript"
+      src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js"
+      charset="UTF-8"
+    ></script>
+    <script src="../Week-6/knockout-3.5.1.js"></script>
+  </head>
+  <body>
+
+    <!-- This is the navbar for the webpage.-->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+
+    <!--This is the main div container. -->
+    <div class="container" role="main">
+        <br /> <br />
+
+        <h2>Person Object Literal Example</h2>
+        
+    <!--This creates our div class form-groups. We assign each of them a label, and then the input is where we will data bind the information to show in our html. -->
+        <div class="form-group">
+            <label for="txtFirstName">First Name:</label>
+            <input type="text" class="form-control alert-warning" data-bind="value: firstName" id="txtFirstName">
+        </div>
+
+        <div class="form-group">
+            <label for="txtLastName">Last Name:</label>
+            <input type="text" class="form-control alert-warning" data-bind="value: lastName" id="txtLastName">
+        </div>
+
+        <div class="form-group">
+            <label for="txtEmail">Email:</label>
+            <input type="text" class="form-control alert-warning" data-bind="value: email" id="txtEmail">
+        </div>
+
+    </div>
+
+    <script>
+
+    //This is our object literal for personViewModel.
+        var personViewModel = {
+            firstName: "Jimmy",
+            lastName: "Pinson",
+            email: "email@domain.com"
+        };
+    
+    //This is our knockout function to apply bindings. 
+        ko.applyBindings(personViewModel);
+
+    </script>
+  </body>
+</html>
