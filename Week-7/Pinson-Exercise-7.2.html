@@ -1,0 +1,115 @@
+<!-- 
+============================================ 
+; Title: Pinson-Exercise-7.2.html 
+; Author: Richard Krasso
+; Date: February 17th 2021 
+; Modified By: James Pinson 
+; Description: This assignment shows how to use if bindings in Knockout.    
+;============================================ 
+--> 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Knockout 'if' Binding</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+
+    <!-- JavaScript Libraries -->
+    <script src="../Week-7/knockout-3.5.1.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div role="main" class="container">
+      <br /><br />
+
+      <!-- This sets up my header.-->
+      <h2>Person View Model</h2>
+
+      <!-- This sets up my label for First Name input field.-->
+      <div class="form-group">
+        <label for="txtFirstName">First Name: </label>
+        <input
+          type="text"
+          data-bind="value: first"
+          class="form-control"
+          id="txtName"
+        />
+      </div>
+
+      <!-- This sets up my label for Last Name input field. Which displays when a first name is entered. -->
+      <div data-bind="if: displayFirstName">
+        <div class="form-group">
+          <label for="txtLastName">Last Name: </label>
+          <input
+            type="text"
+            data-bind="value: last"
+            class="form-control"
+            id="txtAuthor"
+          />
+        </div>
+      </div>
+
+      <!-- This sets up my h2 which will display the full name once last name is entered.-->
+      <br />
+      <div data-bind="if: last">
+        <h2>
+          <span
+            id="bookOutput"
+            class="alert-success"
+            data-bind="text: displayLastName"
+          ></span>
+        </h2>
+      </div>
+
+      <br />
+    </div>
+
+    <script>
+
+      //This creates my PersonViewModel function. 
+      function PersonViewModel() {
+        this.first = ko.observable("");
+        this.last = ko.observable("");
+      
+      //This creates my pure computed binding which returns my first name. 
+        this.displayFirstName = ko.pureComputed(function() {
+          return this.first();
+        }, this);
+
+      //This creates my pure computed binding which returns my first and last name. 
+        this.displayLastName = ko.pureComputed(function() {
+          return  this.first() + " " + this.last();
+        }, this);
+      }
+
+      //This applies my bindings for the PersonViewModel. 
+      ko.applyBindings(new PersonViewModel());
+    </script>
+  </body>
+</html>
