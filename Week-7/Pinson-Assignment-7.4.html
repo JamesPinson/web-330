@@ -1,0 +1,95 @@
+<!-- 
+============================================ 
+; Title: Pinson-Assignment-7.4.html 
+; Author: Richard Krasso
+; Date: February 19th 2021 
+; Modified By: James Pinson 
+; Description: This assignment shows how to use other bindings to insert links and style them within a foreach binding.     
+;============================================ 
+--> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Assignment 7.4</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+
+    <!-- JavaScript Libraries -->
+    <script
+      type="text/javascript"
+      src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js"
+      charset="UTF-8"
+    ></script>
+    <script src="../Week-7/knockout-3.5.1.js"></script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div role="main" class="container">
+      <br /><br />
+<!-- This is the header and table for my data. -->
+      <h2>JavaScript Tutorials</h2>
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+  <!-- This is my table where each element is data-bind to my array. I also add an href and style bind for my link. -->
+        <tbody data-bind="foreach: tutorial">
+          <tr>
+            <td data-bind="text: title"></td>
+            <td data-bind="text: description"></td>
+            <td><a data-bind="text: link, attr: {href:link }, style: {color:'green'}" target="_blank"></a></td> 
+          </tr>
+        </tbody>
+      </table>
+
+      <br />
+    </div>
+
+    <script>
+
+//This is my TutorialViewModel function it holds the data for my array which will bind to show the results in a nice table. 
+function TutorialViewModel() {
+        this.tutorial = ko.observableArray([
+          { title: "An Introduction to JavaScript", description: "A brief overview of what JavaScript is and how it works.", link: "https://javascript.info/intro" },
+          { title: "Data Types", description: "This tutorial covers the different data types in JavaScript.", link: "https://javascript.info/types"},
+          { title: "Comments", description: "This tutorial explains code comments and how to implement them.", link: "https://javascript.info/comments" },
+          { title: "Array Methods", description: "This tutorial explains the types of array methods and how to use them.", link: "https://javascript.info/array-methods"},
+          { title: "Native Prototypes", description: "This tutorial explains Native prototypes and how to use them.", link: "https://javascript.info/native-prototypes" }
+        ]);
+      }
+
+    //This applies the bindings of my TutorialViewModel. 
+      ko.applyBindings(new TutorialViewModel());
+    </script>
+  </body>
+</html>
