@@ -1,10 +1,10 @@
 <!-- 
 ============================================ 
-; Title: Pinson-Exercise-8.3.html 
+; Title: Pinson-Assignment-8.4.html 
 ; Author: Richard Krasso
 ; Date: February 28th 2021 
 ; Modified By: James Pinson 
-; Description: This assignment shows how to use UD Operations.     
+; Description: This assignment shows how to put all the CRUD Operations together.      
 ;============================================ 
 --> 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <title>Exercise 8.3</title>
+    <title>Assignment 8.4</title>
 
     <!-- Stylesheet - Bootstrap -->
     <link
@@ -38,9 +38,8 @@
       src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js"
       charset="UTF-8"
     ></script>
-    <script src="../Week-8/Pinson-Exercise-8.3.html"></script>
+    <script src="../Week-8/knockout-3.5.1.js"></script>
   </head>
-
   <body>
 
     <div role="main" class="container">
@@ -66,6 +65,15 @@
               <div class="card-block p-3">
                 <h3 class="card-title">Employee List</h3>
                 <div class="card-text">
+                    <div class="form-group row">
+                        <label for="txtEmployee" class="col-4 col-form-label">Employee: </label>
+                        <div class="col-6">
+                          <input type="text" data-bind="value: employeeToAdd, valueUpdate: 'afterkeydown'" class="form-control" id="txtEmployee"/>
+                        </div>
+                        <div class="col-4">
+                          <a href="#" data-bind="click: add" class="btn btn-primary">Add</a>
+                        </div>
+                      </div>
                   <table class="table table-dark table-striped table-hover">
                     <thead>
                       <tr>
@@ -149,11 +157,13 @@
       </div>
   
     <script>
+    //This creates my individual employee function. 
         function Employee(id, name) {
         this.Id = id;
         this.Name = name;
       }
 
+//This creates my array of employees. 
       var EmployeeList = [
         new Employee(1, "John"),
         new Employee(2, "Becky"),
@@ -162,8 +172,21 @@
         new Employee(5, "Josh")
       ];
 
+//This creates my EmployeesListViewModel.
       function EmployeesListViewModel() {
-       
+        this.employeeToAdd = ko.observable("");
+//This creates my add function. 
+        this.add = function(){
+          if ((this.employeeToAdd() !== "") && (this.EmployeeList.indexOf(this.employeeToAdd()) < 0)) {
+            this.error("")
+            this.EmployeeList.push(this.employeeToAdd());
+          }
+          else {
+            this.error("Duplicate or Invalid Entry.");
+          }
+          
+          this.employeeToAdd("");
+        }
         var self = this;
 
         self.error = ko.observable("");
@@ -179,18 +202,19 @@
         self.Employee = ko.observable();
         self.Employees = ko.observableArray(EmployeeList);
 
+//This created my edit function. 
         self.edit = function(Employee) {
           self.Employee(Employee);
         };
-
+//This creates my remove function. 
         self.remove = function(Employee) {
           self.Employees.remove(Employee);
         };
-
+//This creates my cancel function. 
         self.cancel = function() {
           self.Employee(null);
         };
-
+//This creates my update function. 
         self.update = function() {
           var l_employee = self.Employee();
           self.Employees.remove(self.Employee());
@@ -198,6 +222,7 @@
         };
       }
 
+//This applies all of my bindings. 
       ko.applyBindings(new EmployeesListViewModel());
     </script>
   </body>
